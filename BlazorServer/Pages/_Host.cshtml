@@ -30,5 +30,22 @@
     </div>
 
     <script src="_framework/blazor.server.js"></script>
+		<script src="/openseadragon/openseadragon.js"></script>
+		<script type="text/javascript">
+
+		function initOpenSeaDragon(targetId, imageUrl) {
+				var viewer = OpenSeadragon({
+						id: targetId,
+						prefixUrl: "openseadragon/images/",
+						tileSources: {
+								type: 'image',
+								url: imageUrl,
+								buildPyramid: false
+						}
+
+				});
+		}
+
+</script> 
 </body>
 </html>

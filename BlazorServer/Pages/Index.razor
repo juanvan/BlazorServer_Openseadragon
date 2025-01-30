@@ -1,4 +1,6 @@
 ﻿@page "/"
+@inject IJSRuntime JS
+
 
 <PageTitle>Index</PageTitle>
 
@@ -8,21 +10,20 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 <div id="openseadragon2" style="width: 800px; height: 600px;"></div>
-<script src="/openseadragon/openseadragon.js"></script>
-<script type="text/javascript">
-    var viewer = OpenSeadragon({
-        id: "openseadragon2",
-        prefixUrl: "openseadragon/images/",
-       tileSources: {
-        type: 'image',
-        url:  '@imageUrl',
-        buildPyramid: false
-       }
 
-    });
-</script> 
 
 @code
 {
     private string imageUrl = @"https://i.imgur.com/A9AOyTV.jpeg";
+
+		protected override async Task OnAfterRenderAsync(bool firstRender)
+		{
+				if (firstRender)
+				{
+						await JS.InvokeVoidAsync("initOpenSeaDragon", "openseadragon2", imageUrl);
+				}
+		}
+
+
+
 }
